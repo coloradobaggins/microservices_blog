@@ -18,9 +18,14 @@ app.post('/events', (req, res)=>{
 
     //Now we have got that event, we're going to make our series of post requests to our other running services.
 
-    axios.post('http://localhost:4000/events', event);
-    axios.post('http://localhost:4001/events', event);
-    axios.post('http://localhost:4002/events', event);
+    //Posts service
+    axios.post('http://localhost:4000/events', event).catch((err)=>{ console.log(err); });
+
+    //Comments service
+    axios.post('http://localhost:4001/events', event).catch((err)=>{ console.log(err) });
+
+    //Query service
+    axios.post('http://localhost:4002/events', event).catch((err)=>{ console.log(err); })
 
     res.json({status: 'OK'});
 
